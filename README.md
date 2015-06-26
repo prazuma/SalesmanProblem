@@ -4,7 +4,7 @@ $ git branch
 $ git checkout -b [your branch]  
 ファイル編集
 
-ファイル編集後
+ファイル編集後  
 $ git add .  
 $ git commit -m "commit message"  
 $ git push origin master  
