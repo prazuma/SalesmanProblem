@@ -1,18 +1,23 @@
-$ git pull  
-$ git branch  
-この結果がmasterであるのを確認（もしくは、自身の作業したいbranch）  
-$ git checkout -b [your branch]  
-このコマンドは、新たにbranchを作ってそのbranchに移動するもの。（作業したいbranchにいる場合は不要）  
-ファイル編集（いつも通りやってくださいなー）  
+GITの操作
+===
+### 作業を始める前に   
+    $ git pull
 
-ファイル編集中（何回かキリのいいところで）  
-$ git add .  
-$ git commit -m "commit message"  
+### branchの操作
+#### 1. 新しい自分の作業用branchを作る場合  
+    $ git branch  
+    $ git branch [new branch name]  
+    $ git checkout [new branch name]
+#### 2. すでにあるbranchで作業を行う場合  
+    $ git checkout [branch name]
+  
+### 編集後(もしくは編集中、一時保存として)
+    $ git add .
+    $ git commit -m "commit message"
 
-満足したら、もしくはとりあえず見せたいって思ったら、  
-$ git push origin master  
-Github上で、pull requestを送ってー（人´∀`*）  
-
+### とりあえず完成したら
+    $ git push origin master
+このコマンドを打って、branchをこのリポジトリにpushを…  
 
 Google 2015 STEP Class 5 - Travelling Salesman Problem Challenges
 ====
