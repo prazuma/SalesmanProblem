@@ -1,5 +1,10 @@
 $ git pull  
+$ git branch  
+この結果がmasterであるのを確認  
 $ git checkout -b [your branch]  
+ファイル編集
+
+ファイル編集後
 $ git add .  
 $ git commit -m "commit message"  
 $ git push origin master  
