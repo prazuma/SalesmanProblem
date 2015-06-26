@@ -1,3 +1,11 @@
+$ git pull
+$ git checkout -b [your branch]
+$ git add .
+$ git commit -m "commit message"
+$ git push origin master
+
+
+
 Google 2015 STEP Class 5 - Travelling Salesman Problem Challenges
 ====
 
