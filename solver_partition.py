@@ -18,18 +18,24 @@ def divide_cities(cities):
 
 def find_common_index(city1, city2):
     common = set(city1).intersection(set(city2))
-    common_index = city1.index(list(common)[0])
-    return common_index
+    common_index1 = city1.index(list(common)[0])
+    common_index2 = city2.index(list(common)[0])
+    return common_index1, common_index2
 
 def connect_cities(city1, city2):
-    print find_common_index(list(city1), list(city2))
+    common_index1, common_index2 = find_common_index(list(city1), list(city2))
+    print common_index1
+    print common_index2
+    d1 = distance(city1[common_index1 - 1], city1[common_index1]) + distance(city2[common_index2], city2[common_index2 + 1]) - distance(city1[common_index1 - 1], city2[common_index2 + 1])
+
+
 
 def solve(cities):
     
     N = len(cities)
 
     if(N <= 3):
-        print cities
+        print "---"
     else:
         first_harf_cities, latter_harf_cities = divide_cities(cities)
         result_first = solve(first_harf_cities)
