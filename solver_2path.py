@@ -44,12 +44,18 @@ def solve(cities, first_city_index):
 
 def solve_all(cities):
     n = len(cities)
+    min_length = 1000000000
+    min_solution = []
     for i in range(n):
         solution = solve(cities, i)
-    return solution
+        path_length = sum(solution)
+        if(path_length < min_length):
+            min_length = path_length
+            min_solution = solution
+    return min_solution
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
-    solution = solve(read_input(sys.argv[1]), 4)
-    #solution = solve_all(read_input(sys.argv[1]))
+    #solution = solve(read_input(sys.argv[1]), sys.argv[2])
+    solution = solve_all(read_input(sys.argv[1]))
     print_solution(solution)
