@@ -48,7 +48,7 @@ def solve_all(cities):
     min_solution = []
     for i in range(n):
         solution = solve(cities, i)
-        path_length = sum(solution)
+        path_length = sum(solution)#本当はここで距離の和を求めたい
         if(path_length < min_length):
             min_length = path_length
             min_solution = solution
