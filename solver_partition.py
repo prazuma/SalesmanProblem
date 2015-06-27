@@ -16,6 +16,10 @@ def divide_cities(cities):
     latter_harf_cities = cities[n:]
     return first_harf_cities, latter_harf_cities
 
+def connect_cities(city1, city2):
+    common = set(city1).intersection(set(city2)) #find common point
+    print common
+
 def solve(cities):
     
     N = len(cities)
@@ -24,8 +28,9 @@ def solve(cities):
         print cities
     else:
         first_harf_cities, latter_harf_cities = divide_cities(cities)
-        solve(first_harf_cities)
-        solve(latter_harf_cities)
+        result_first = solve(first_harf_cities)
+        result_latter = solve(latter_harf_cities)
+        connect_cities(result_first, result_latter)
 
     """
     dist = [[0] * N for i in range(N)]
