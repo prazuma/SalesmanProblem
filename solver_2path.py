@@ -35,11 +35,13 @@ def solve(cities, first_city_index):
         if i % 2 == 0:
             solution.insert(front, next_city)
             front += 1
+            current_city = solution[rear - 1]
         else:
             solution.insert(len(solution) - rear, next_city)
             rear += 1
+            current_city = solution[front - 1]
         i += 1
-        current_city = next_city
+        #current_city = next_city
     return solution
 
 def solve_all(cities):
@@ -53,10 +55,11 @@ def solve_all(cities):
         if(path_length < min_length):
             min_length = path_length
             min_solution = solution
+    print min_length
     return min_solution
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
-    #solution = solve(read_input(sys.argv[1]), sys.argv[2])
-    solution = solve_all(read_input(sys.argv[1]))
+    solution = solve(read_input(sys.argv[1]), 0)
+    #solution = solve_all(read_input(sys.argv[1]))
     print_solution(solution)
