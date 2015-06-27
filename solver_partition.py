@@ -7,14 +7,32 @@ from common import print_solution, read_input
 
 
 def distance(city1, city2):
-    return math.sqrt((city1[0] - city2[0]) ** 2 + (city1[1] - city2[1]) ** 2)
+    return math.sqrt((city1[0] - city2[0]) ** 2 + (city1[1] - city2[1]) ** 2)    
 
+def divide_cities(cities):
+    cities = sorted(cities)
+    n = len(cities) / 2
+    first_harf_cities = cities[:n + 1]
+    latter_harf_cities = cities[n:]
+    return first_harf_cities, latter_harf_cities
 
 def solve(cities):
+    
     N = len(cities)
 
-    cities = sorted(cities)
+    p1, p2 = divide_cities(list(cities))
+    print p1
+    print p2
 
+    """
+    #divide cities
+    cities = sorted(cities)
+    n = len(cities) / 2
+    first_harf_cities = cities[:n + 1]
+    latter_harf_cities = cities[n:]
+    print first_harf_cities
+    print latter_harf_cities
+"""
     """
     dist = [[0] * N for i in range(N)]
     for i in range(N):
