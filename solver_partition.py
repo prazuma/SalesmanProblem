@@ -22,13 +22,20 @@ def find_common_index(city1, city2):
     common_index2 = city2.index(list(common)[0])
     return common_index1, common_index2
 
+def find_exchange_pointer(city, common_index):
+    if(common_index == 0):
+        return len(city) - 1, 1
+    if(common_index == len(city) - 1):
+        return len(city) - 2, 0
+    return common_index - 1, common_index + 1
+
 def connect_cities(city1, city2):
     common_index1, common_index2 = find_common_index(list(city1), list(city2))
     print common_index1
     print common_index2
-    d1 = distance(city1[common_index1 - 1], city1[common_index1]) + distance(city2[common_index2], city2[common_index2 + 1]) - distance(city1[common_index1 - 1], city2[common_index2 + 1])
-
-
+    pointer1_1, pointer1_2 = find_exchange_pointer(city1, common_index1);
+    pointer2_1, pointer2_2 = find_exchange_pointer(city2, common_index2);
+    
 
 def solve(cities):
     
@@ -40,6 +47,8 @@ def solve(cities):
         first_harf_cities, latter_harf_cities = divide_cities(cities)
         result_first = solve(first_harf_cities)
         result_latter = solve(latter_harf_cities)
+        print result_first
+        print result_latter
         connect_cities(result_first, result_latter)
 
     """
