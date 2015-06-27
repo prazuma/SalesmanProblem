@@ -16,11 +16,13 @@ def divide_cities(cities):
     latter_harf_cities = cities[n:]
     return first_harf_cities, latter_harf_cities
 
-def connect_cities(city1, city2):
+def find_common_index(city1, city2):
     common = set(city1).intersection(set(city2))
-    print common
     common_index = city1.index(list(common)[0])
-    print common_index
+    return common_index
+
+def connect_cities(city1, city2):
+    print find_common_index(list(city1), list(city2))
 
 def solve(cities):
     
