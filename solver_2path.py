@@ -47,8 +47,9 @@ def solve_all(cities):
     min_length = 1000000000
     min_solution = []
     for i in range(n):
-        solution = solve(cities, i)
-        path_length = sum(solution)#本当はここで距離の和を求めたい
+        solution = solve(list(cities), i)
+        path_length = sum(distance(cities[u], cities[v])
+                          for u, v in zip(solution, solution[1:] + solution[0:1]))
         if(path_length < min_length):
             min_length = path_length
             min_solution = solution
