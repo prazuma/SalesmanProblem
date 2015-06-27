@@ -17,8 +17,10 @@ def divide_cities(cities):
     return first_harf_cities, latter_harf_cities
 
 def connect_cities(city1, city2):
-    common = set(city1).intersection(set(city2)) #find common point
+    common = set(city1).intersection(set(city2))
     print common
+    common_index = city1.index(list(common)[0])
+    print common_index
 
 def solve(cities):
     
