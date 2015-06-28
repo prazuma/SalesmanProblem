@@ -59,7 +59,6 @@ def connect_cities(city1, city2):
     if(key % 2 == 0):
         point = pointer_list[key][1] + len(city2)
         for i in range(len(city2) - 1):
-            print (point - i) % len(city2)
             path.append(city2[(point - i) % len(city2)])
     else:
         point = pointer_list[key][1]
