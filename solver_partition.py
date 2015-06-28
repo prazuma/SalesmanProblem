@@ -16,8 +16,8 @@ def divide_cities(cities):
     #else sort width
     max_x = list(max(cities))[0]
     min_x = list(min(cities))[0]
-    max_y = list(max(cities, key = (lambda x: x[1])))[1]
-    min_y = list(min(cities, key = (lambda x: x[1])))[1]
+    max_y = list(max(cities, key = lambda x: x[1]))[1]
+    min_y = list(min(cities, key = lambda x: x[1]))[1]
     if(max_x - min_x > max_y - min_y):
         cities = sorted(cities)
     else:
