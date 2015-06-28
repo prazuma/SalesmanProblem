@@ -53,13 +53,11 @@ def connect_cities(city1, city2):
 
     #find change_point
     key = find_max_diff_point(pointer_list, city1, city2, common)
-    print key
 
     #extract common from city2. it should return path
     path = []
     if(key % 2 == 0):
         point = pointer_list[key][1] + len(city2)
-        print point
         for i in range(len(city2) - 1):
             print (point - i) % len(city2)
             path.append(city2[(point - i) % len(city2)])
@@ -78,7 +76,6 @@ def connect_cities(city1, city2):
     return city1
 
 def solve(cities):
-    
     N = len(cities)
 
     if(N <= 3):
@@ -91,5 +88,10 @@ def solve(cities):
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
-    solution = solve(read_input(sys.argv[1]))
-    print_solution(solution)
+    city = read_input(sys.argv[1])
+    solution = solve(city)
+    solution_path = []
+    for i in range(len(solution)):
+        solution_path.append(list(city).index(solution[i]))
+    #print_solution(solution)
+    print_solution(solution_path)
