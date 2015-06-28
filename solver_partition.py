@@ -81,7 +81,8 @@ def connect_cities(city1, city2):
         point = pointer_list[key][0] + 1
         city1[point:point] = path
     else:
-        point = pointer_list[key][0] - 1
+        point = pointer_list[key][0]
+        path.reverse()
         city1[point:point] = path
     return city1
 
