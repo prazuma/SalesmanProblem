@@ -88,12 +88,8 @@ def solve(cities):
         result_first = solve(first_harf_cities)
         result_latter = solve(latter_harf_cities)
         return connect_cities(result_first, result_latter)
-    #return solution
-    return cities
-
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
-    print solve(read_input(sys.argv[1]))
-    #solution = solve(read_input(sys.argv[1]))
-    #print_solution(solution)
+    solution = solve(read_input(sys.argv[1]))
+    print_solution(solution)
