@@ -39,20 +39,37 @@ def connect_cities(city1, city2):
     pointer2_1, pointer2_2 = find_exchange_pointer(city2, common_index2);
     pointer_list = [[pointer1_1, pointer2_1], [pointer1_1, pointer2_2], [pointer1_2, pointer2_1], [pointer1_2, pointer2_2]]
 
+    #find change_point
     max_diff = 0
     key = 0
     for i in range(4):
         p1 = pointer_list[i][0]
         p2 = pointer_list[i][1]
         diff = diff_distance(city1[p1], common, city2[p2])
-        print diff
         if(diff > max_diff):
             max_diff = diff
             key = i
-        #print pointer_list[i][1]
     print key, max_diff
-    
 
+    #extract common from city2. it should return path
+    path = []
+    if(key % 2 == 0):
+        point = pointer_list[key][1] + len(city2)
+        print point
+        for i in range(len(city2) - 1):
+            print (point - i) % len(city2)
+            path.append(city2[(point - i) % len(city2)])
+        print path
+    else:
+        point = pointer_list[key][1]
+        print "point",
+        print point
+        for i in range(len(city2) - 1):
+            path.append(city2[(point + i) % len(city2)])
+        print path
+
+    #insert path to city1
+    
 
 def solve(cities):
     
