@@ -10,7 +10,18 @@ def distance(city1, city2):
     return math.sqrt((city1[0] - city2[0]) ** 2 + (city1[1] - city2[1]) ** 2)    
 
 def divide_cities(cities):
-    cities = sorted(cities)
+    #find max x, y
+    #find min x, y
+    #if \x\ > \y\, sort height
+    #else sort width
+    max_x = list(max(cities))[0]
+    min_x = list(min(cities))[0]
+    max_y = list(max(cities, key = (lambda x: x[1])))[1]
+    min_y = list(min(cities, key = (lambda x: x[1])))[1]
+    if(max_x - min_x > max_y - min_y):
+        cities = sorted(cities)
+    else:
+        cities = sorted(cities, key = lambda x: x[1])
     n = len(cities) / 2
     first_harf_cities = cities[:n + 1]
     latter_harf_cities = cities[n:]
@@ -92,5 +103,4 @@ if __name__ == '__main__':
     solution_path = []
     for i in range(len(solution)):
         solution_path.append(list(city).index(solution[i]))
-    #print_solution(solution)
     print_solution(solution_path)
