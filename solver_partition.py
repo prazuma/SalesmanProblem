@@ -9,16 +9,26 @@ from common import print_solution, read_input
 def distance(city1, city2):
     return math.sqrt((city1[0] - city2[0]) ** 2 + (city1[1] - city2[1]) ** 2)    
 
+def city_pattern(city):
+    max_x = list(max(city))[0]
+    min_x = list(min(city))[0]
+    max_y = list(max(city, key = lambda x: x[1]))[1]
+    min_y = list(min(city, key = lambda x: x[1]))[1]
+    return max_x - min_x > max_y - min_y
+
 def divide_cities(cities):
     #find max x, y
     #find min x, y
     #if \x\ > \y\, sort height
     #else sort width
+    """
     max_x = list(max(cities))[0]
     min_x = list(min(cities))[0]
     max_y = list(max(cities, key = lambda x: x[1]))[1]
     min_y = list(min(cities, key = lambda x: x[1]))[1]
-    if(max_x - min_x > max_y - min_y):
+    """
+    
+    if(city_pattern(cities)):
         cities = sorted(cities)
     else:
         cities = sorted(cities, key = lambda x: x[1])
@@ -95,13 +105,6 @@ def solve(cities):
         first_harf_cities, latter_harf_cities = divide_cities(cities)
         result_first = solve(first_harf_cities)
         result_latter = solve(latter_harf_cities)
-        """
-        solution = connect_cities(result_first, result_latter)
-        solution_path = []
-        for i in range(len(solution)):
-            solution_path.append(list(cities).index(solution[i]))
-        return solution_path
-        """
         return connect_cities(result_first, result_latter)
 
 def match_index(city_index, solution):
