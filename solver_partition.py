@@ -102,16 +102,7 @@ def solve(cities):
         result_latter = solve(latter_harf_cities)
         return connect_cities(result_first, result_latter)
 
-def match_index(city_index, solution):
-    solution_index = []
-    for i in range(len(solution)):
-        solution_index.append(list(city_index).index(solution[i]))
-    return solution_index
-
-if __name__ == '__main__':
-    assert len(sys.argv) > 1
-    city = read_input(sys.argv[1])
-    solution = solve(city)
+def do_2opt(solution):    
     for i in range(len(solution) - 1):
         for j in range(i+2, len(solution)):
             j2 = j + 1
@@ -122,6 +113,19 @@ if __name__ == '__main__':
                 exchange_path = solution[i+1:j2]
                 exchange_path.reverse()
                 solution[i+1:j2] = exchange_path
+    return solution
+    
+def match_index(city_index, solution):
+    solution_index = []
+    for i in range(len(solution)):
+        solution_index.append(list(city_index).index(solution[i]))
+    return solution_index
+
+if __name__ == '__main__':
+    assert len(sys.argv) > 1
+    city = read_input(sys.argv[1])
+    solution = solve(city)
+    solution = do_2opt(solution)
     solution = match_index(city, solution)
     print_solution(solution)
 
