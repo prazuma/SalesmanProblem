@@ -95,13 +95,32 @@ def solve(cities):
         first_harf_cities, latter_harf_cities = divide_cities(cities)
         result_first = solve(first_harf_cities)
         result_latter = solve(latter_harf_cities)
+        """
+        solution = connect_cities(result_first, result_latter)
+        solution_path = []
+        for i in range(len(solution)):
+            solution_path.append(list(cities).index(solution[i]))
+        return solution_path
+        """
         return connect_cities(result_first, result_latter)
+
+def match_index(city_index, solution):
+    solution_index = []
+    for i in range(len(solution)):
+        solution_index.append(list(city_index).index(solution[i]))
+    return solution_index
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
     city = read_input(sys.argv[1])
     solution = solve(city)
+    solution = match_index(city, solution)
+    print_solution(solution)
+"""
     solution_path = []
     for i in range(len(solution)):
         solution_path.append(list(city).index(solution[i]))
     print_solution(solution_path)
+"""
+
+
