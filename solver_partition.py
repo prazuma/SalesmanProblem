@@ -75,19 +75,9 @@ def connect_cities(city1, city2):
     #find change_point
     key = find_max_diff_point(pointer_list, city1, city2, common)
 
-    #remove common_city from city2. it should return path
+    #remove common_city from city2. it should return correct path
     path = remove_common(city2, pointer_list[key][1], key)
-    """
-    path = []
-    if(key % 2 == 0):
-        point = pointer_list[key][1] + len(city2)
-        for i in range(len(city2) - 1):
-            path.append(city2[(point - i) % len(city2)])
-    else:
-        point = pointer_list[key][1]
-        for i in range(len(city2) - 1):
-            path.append(city2[(point + i) % len(city2)])
-"""
+
     #insert path to city1
     if(key < 2):
         point = pointer_list[key][0] + 1
