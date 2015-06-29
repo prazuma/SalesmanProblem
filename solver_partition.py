@@ -3,7 +3,7 @@
 import sys
 import math
 
-from common import print_solution, read_input
+from common import print_solution, read_input, write_solution
 
 
 def distance(city1, city2):
@@ -127,6 +127,7 @@ if __name__ == '__main__':
     solution = solve(city)
     solution = do_2opt(solution)
     solution = match_index(city, solution)
+    write_solution(solution)
     print_solution(solution)
 
 
