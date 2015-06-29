@@ -66,6 +66,15 @@ def remove_common(city, point, key):
             path.append(city[(point + i) % len(city)])
     return path
 
+def insert_path_city(city1, point, path, key):
+    if(key < 2):
+        point += 1
+        city1[point:point] = path
+    else:
+        path.reverse()
+        city1[point:point] = path
+    return city1
+
 def connect_cities(city1, city2):
     common_index1, common_index2, common = find_common_index(list(city1), list(city2))
     pointer1_1, pointer1_2 = find_exchange_pointer(city1, common_index1);
@@ -77,7 +86,10 @@ def connect_cities(city1, city2):
 
     #remove common_city from city2. it should return correct path
     path = remove_common(city2, pointer_list[key][1], key)
+    
+    city1 = insert_path_city(list(city1), pointer_list[key][0], path, key)
 
+    """
     #insert path to city1
     if(key < 2):
         point = pointer_list[key][0] + 1
@@ -86,6 +98,7 @@ def connect_cities(city1, city2):
         point = pointer_list[key][0]
         path.reverse()
         city1[point:point] = path
+"""
     return city1
 
 def solve(cities):
