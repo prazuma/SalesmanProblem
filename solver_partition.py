@@ -116,11 +116,5 @@ if __name__ == '__main__':
     solution = solve(city)
     solution = match_index(city, solution)
     print_solution(solution)
-"""
-    solution_path = []
-    for i in range(len(solution)):
-        solution_path.append(list(city).index(solution[i]))
-    print_solution(solution_path)
-"""
 
 
