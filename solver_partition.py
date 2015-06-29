@@ -119,14 +119,9 @@ if __name__ == '__main__':
                 j2 = 0
             diff = distance(solution[i], solution[i + 1]) + distance(solution[j], solution[j2]) - distance(solution[i], solution[j]) - distance(solution[i + 1], solution[j2])
             if(diff > 0):
-                exchange_path = solution[i+1:j2+1]
+                exchange_path = solution[i+1:j2]
                 exchange_path.reverse()
-                solution[i+1:j2+1] = exchange_path
-                """
-                del solution[j:j2+1]
-                exchange_path.reverse()
-                solution[i+1:i+1] = exchange_path
-                """
+                solution[i+1:j2] = exchange_path
     solution = match_index(city, solution)
     print_solution(solution)
 
