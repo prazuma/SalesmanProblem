@@ -17,17 +17,6 @@ def city_pattern(city):
     return max_x - min_x > max_y - min_y
 
 def divide_cities(cities):
-    #find max x, y
-    #find min x, y
-    #if \x\ > \y\, sort height
-    #else sort width
-    """
-    max_x = list(max(cities))[0]
-    min_x = list(min(cities))[0]
-    max_y = list(max(cities, key = lambda x: x[1]))[1]
-    min_y = list(min(cities, key = lambda x: x[1]))[1]
-    """
-    
     if(city_pattern(cities)):
         cities = sorted(cities)
     else:
