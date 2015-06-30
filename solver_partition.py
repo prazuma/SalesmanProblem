@@ -121,42 +121,61 @@ def match_index(city_index, solution):
         solution_index.append(list(city_index).index(solution[i]))
     return solution_index
 
-def lin_kernighan(cities):
-    min_len = 10000000
-    base = 0
+def parcel_reverse(cities, from_city, to_city):
     N = len(cities)
-    for i in range(N):
-        i1 = i
-        i2 = (i + 1) % N
-        i3 = (i + 2) % N
-        length = distance(cities[i1], cities[i2]) + distance(cities[i2], cities[i3])
-        if(length < min_len):
-            min_len = length
-            base = i
-    count = 0
-    for probe in range(base + 3, N):
-        print "probe: ",
-        print probe
+    if to_city < from_city:
+        block = cities[from_city:N] + cities[0:to_city+1]
+        block.reverse()
+        cities[from_city:N] = block[0:N-from_city]
+        cities[0:to_city+1] = block[N-from_city:]
+    else:
+        block = cities[from_city:to_city+1]
+        block.reverse()
+        cities[from_city:to_city+1] = block[0:]
+    return cities
+
+def lin_kernighan(cities):
+    N = len(cities)
+    for k in range(N):
+        base = 0
+        min_len = 10000000
+        for i in range(k+2, N):
+            i1 = i - 2
+            i2 = i - 1
+            i3 = i
+            length = distance(cities[i1], cities[i2]) + distance(cities[i2], cities[i3])
+            if(length < min_len):
+                min_len = length
+                base = i3
+
+        count = 0
+        probe = (base + 1) % N
         next_probe = (probe + 1) % N
-        if(count == 0):
-            delta = distance(cities[base], cities[base + 1]) - distance(cities[base + 1], cities[next_probe])
-        elif(count == 1):
-            delta = distance(cities[base], cities[base + 1]) + delta - distance(cities[base + 1], cities[next_probe])
-        else:
-            delta = distance(cities[base], cities[base + 1]) + distance(cities[probe], cities[next_probe]) - distance(cities[base], cities[probe]) - distance(cities[base + 1], cities[next_probe]) + delta
-
-        count += 1
-        print delta
-                
-
+        next_base = (base + 1) % N
+        delta = 0
+        for j in range(N-3):
+            if(count == 0):
+                if(distance(cities[base], cities[next_base]) > distance(cities[next_base], cities[next_probe])):
+                    delta = distance(cities[base], cities[next_base]) - distance(cities[next_base], cities[next_probe])
+                    cities = parcel_reverse(cities, next_base, probe)
+                    count += 1
+                else:
+                    if(distance(cities[base], cities[next_base]) + delta > distance(cities[next_base], cities[next_probe])):
+                        count += 1
+                        delta = distance(cities[base], cities[next_base]) + distance(cities[probe], cities[next_probe]) - distance(cities[base], cities[probe]) - distance(cities[next_base], cities[next_base]) + delta
+                        cities = parcel_reverse(cities, next_base, probe)
+            probe = (probe + 1) % N
+            next_probe = (probe + 1) % N
+    return cities
+    
 if __name__ == '__main__':
     assert len(sys.argv) > 1
     city = read_input(sys.argv[1])
     solution = solve(city)
+    solution = lin_kernighan(solution)
     solution = do_2opt(solution)
-    lin_kernighan(solution)
     solution = match_index(city, solution)
     write_solution(solution)
-    print_solution(solution)
+    #print_solution(solution)
 
 
