@@ -121,11 +121,40 @@ def match_index(city_index, solution):
         solution_index.append(list(city_index).index(solution[i]))
     return solution_index
 
+def lin_kernighan(cities):
+    min_len = 10000000
+    base = 0
+    N = len(cities)
+    for i in range(N):
+        i1 = i
+        i2 = (i + 1) % N
+        i3 = (i + 2) % N
+        length = distance(cities[i1], cities[i2]) + distance(cities[i2], cities[i3])
+        if(length < min_len):
+            min_len = length
+            base = i
+    count = 0
+    for probe in range(base + 3, N):
+        print "probe: ",
+        print probe
+        next_probe = (probe + 1) % N
+        if(count == 0):
+            delta = distance(cities[base], cities[base + 1]) - distance(cities[base + 1], cities[next_probe])
+        elif(count == 1):
+            delta = distance(cities[base], cities[base + 1]) + delta - distance(cities[base + 1], cities[next_probe])
+        else:
+            delta = distance(cities[base], cities[base + 1]) + distance(cities[probe], cities[next_probe]) - distance(cities[base], cities[probe]) - distance(cities[base + 1], cities[next_probe]) + delta
+
+        count += 1
+        print delta
+                
+
 if __name__ == '__main__':
     assert len(sys.argv) > 1
     city = read_input(sys.argv[1])
     solution = solve(city)
     solution = do_2opt(solution)
+    lin_kernighan(solution)
     solution = match_index(city, solution)
     write_solution(solution)
     print_solution(solution)
