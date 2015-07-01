@@ -5,7 +5,8 @@ from random import randrange
 import math
 import sys
 from ant import Ant
-from common import print_solution, read_input
+from common import print_solution, read_input, write_solution
+from solver_greedy import solve
 
 ALPHA = 1.0#蟻が出すフェロモンの量
 BETA = 0.5#都市間距離の重要度を決めるパラメータ
@@ -28,10 +29,10 @@ def get_dists(cities):
             dists[i][j] = dists[j][i] = dist
     return dists
 
-def get_phers(cities):#フェロモンの初期化
+def get_phers(cities, phero):#フェロモンの初期化
     N = len(cities)
     phers = numpy.empty(shape = (N, N))
-    phers[:] = 0.1#本当は、greedyで、全ての別の都市をスタート地点とした経路を都市のあk図だけ作り、その平均をとったもの
+    phers[:] = phero#本当は、greedyで、全ての別の都市をスタート地点とした経路を都市のあk図だけ作り、その平均をとったもの
     return phers
 
 def get_ants(num_ant, fields):
@@ -74,6 +75,8 @@ def start(fields, ants):
     best_ant = None
     min_len = 1000000000
     for i in range(MAX_RUN):
+        print "i: ",
+        print i
         update_pheromons(fields, ants)
         for ant in ants:
             ant.run()
@@ -82,10 +85,21 @@ def start(fields, ants):
                 min_len = ant.path_len
     return best_ant
 
+def find_distance(cities, dists):
+    N = len(cities)
+    path_len = 0
+    for i in range(N):
+        if i == N - 1:
+            path_len += dists[cities[i]][cities[0]]
+        else:
+            path_len += dists[cities[i]][cities[i + 1]]
+    return path_len
+            
 
-def solve(cities):
+def ant_solve(cities):
     dists = get_dists(cities)
-    phers = get_phers(cities)
+    phero = find_distance(solve(cities), dists)
+    phers = get_phers(cities, len(cities)/phero)
     fields = dict(
         cities = cities,
         dists = dists,
@@ -97,5 +111,6 @@ def solve(cities):
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
-    solution = solve(read_input(sys.argv[1]))
-    print_solution(solution.path)
+    solution = ant_solve(read_input(sys.argv[1]))
+    write_solution(solution.path)
+    #print_solution(solution.path)
