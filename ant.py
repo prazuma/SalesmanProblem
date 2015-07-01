@@ -3,7 +3,7 @@ import bisect
 
 class Ant(object):
 
-    def __init(self, initial_city, fields, alpha, beta):
+    def __init__(self, initial_city, fields, alpha, beta):
         self.initial_city = initial_city
         self.fields = fields
         self.alpha = alpha

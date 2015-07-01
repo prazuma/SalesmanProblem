@@ -32,22 +32,30 @@ def get_phers(cities):#フェロモンの初期化
     phers[:] = 0.1#本当は、greedyで、全ての別の都市をスタート地点とした経路を都市のあk図だけ作り、その平均をとったもの
     return phers
 
-def get_ants(num_ant, cities):
+def get_ants(num_ant, fields):
     #都市の数と同じ蟻を用意
     #それぞれランダムに都市を割り当て配置する。
     #繰り返し回数(t) = 0とする
     ants = []
     for i in range(num_ant):
-        ant = Ant(numpy.random.randint(0, len(fields)), fields, ALPHA, BETA)
+        initial_city = numpy.random.randint(0, num_ant)
+        print initial_city
+        ant = Ant(initial_city, fields, ALPHA, BETA)
         ants.append(ant)
     return ants
 
 def solve(cities):
     dists = get_dists(cities)
     phers = get_phers(cities)
-    return dists
+    fields = dict(
+        cities = cities,
+        dists = dists,
+        phers = phers
+    )
+    ants = get_ants(len(cities), fields)
+    return ants
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
     solution = solve(read_input(sys.argv[1]))
-    print_solution(solution)
+    #print_solution(solution)
