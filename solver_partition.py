@@ -167,46 +167,15 @@ def lin_kernighan(cities):
             probe = (probe + 1) % N
             next_probe = (probe + 1) % N
     return cities
-
-def do_oropt(solution):
-    N = len(solution)
-    for i in range(N):
-        i0 = i - X1
-        i1 = i + 1
-        if i0 < 0:
-            i0 = N - 1
-        if i1 == N:
-            i1 = 0
-        for j in range(N):
-            j1 = j + 1
-            if j1 == N:
-                j1 == 0
-            if j != i and j1 != i:
-                l1 = distance(solution[i0], solution[i])
-                l2 = distance(solution[i], solution[i1])
-                l3 = distance(solution[j], solution[j1])
-                l4 = distance(solution[i0], solution[i1])
-                l5 = distance(solution[j], solution[i])
-                l6 = distance(solution[i], solution[j1])
-                if l1 + l2 + l3 > l4 + l5 + l6:
-                    p = solution[i]
-                    solution[i:i + 1] = []
-                    if i < j:
-                        solution[j:j] = [p]
-                    else:
-                        solution[j1:j1] = [p]
-    return solution
-
                  
 if __name__ == '__main__':
     assert len(sys.argv) > 1
     city = read_input(sys.argv[1])
     solution = solve(city)
-    #solution = lin_kernighan(solution)
+    solution = lin_kernighan(solution)
     solution = do_2opt(solution)
-    solution = do_oropt(solution)
     solution = match_index(city, solution)
     write_solution(solution)
-    #print_solution(solution)
+    print_solution(solution)
 
 
