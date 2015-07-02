@@ -14,6 +14,7 @@ def format_solution(solution):
 def print_solution(solution):
     print(format_solution(solution))
 
+
 def write_solution(solution):
     n = len(solution)
     num_cities = [5, 8, 16, 64, 128, 512, 2048]
