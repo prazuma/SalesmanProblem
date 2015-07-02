@@ -1,25 +1,3 @@
-GITの操作
-===
-### 作業を始める前に   
-    $ git pull
-もし、うまく行かなかったら、http://yuzu441.hateblo.jp/entry/2014/03/21/170316 を参考にしてみてください
-
-### branchの操作
-#### 1. 新しい自分の作業用branchを作る場合  
-    $ git branch  
-    $ git branch [new branch name]  
-    $ git checkout [new branch name]
-#### 2. すでにあるbranchで作業を行う場合  
-    $ git checkout [branch name]
-  
-### 編集後(もしくは編集中、一時保存として)
-    $ git add .
-    $ git commit -m "commit message"
-
-### とりあえず完成したら
-    $ git push origin master
-このコマンドを打って、branchをこのリポジトリにpushを…  
-
 Google 2015 STEP Class 5 - Travelling Salesman Problem Challenges
 ====
 
