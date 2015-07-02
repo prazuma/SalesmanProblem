@@ -10,8 +10,8 @@ def distance(city1, city2):
 
 def path_length(path, cities):
     path_len = 0
-    for i in range(len(cities)):
-        if i == len(cities) - 1:
+    for i in range(len(path)):
+        if i == len(path) - 1:
             path_len += distance(cities[path[i]], cities[path[0]])
         else:
             path_len += distance(cities[path[i]], cities[path[i + 1]])
@@ -24,6 +24,9 @@ def fullsearch(cities):
     min_path = []
     def fullsearch_sub(start, solution):
         global min_length, min_path
+        dist = path_length(solution, cities)
+        if dist > min_length:
+            return
         if N == len(solution): 
             new_len = path_length(solution, cities)
             if(new_len < min_length):
@@ -38,29 +41,6 @@ def fullsearch(cities):
     for i in range(N):
         fullsearch_sub(i, min_path)
     return min_path               
-                     
-def solve(cities):
-    N = len(cities)
-    
-    dist = [[0] * N for i in range(N)]
-    for i in range(N):
-        for j in range(N):
-            dist[i][j] = dist[j][i] = distance(cities[i], cities[j])
-
-    current_city = 0
-    unvisited_cities = set(range(1, N))
-    solution = [current_city]
-
-    def distance_from_current_city(to):
-        return dist[current_city][to]
-
-    #while unvisited_cities:
-    #    next_city = min(unvisited_cities, key=distance_from_current_city)
-    #    unvisited_cities.remove(next_city)
-    #    solution.append(next_city)
-    #    current_city = next_city
-    # return solution
-
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
