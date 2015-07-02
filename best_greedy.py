@@ -3,7 +3,7 @@
 import sys
 import math
 
-from common import print_solution, read_input
+from common import print_solution, read_input, write_solution
 
 
 def distance(city1, city2):
@@ -37,39 +37,28 @@ def solve(cities):
         solution.append(start)
         return solution
 
-    def remove_intersection(solution):
-        i = -1
-        while i<len(solution)-3:
-            i += 1
-            point1, point2 = cities[solution[i]], cities[solution[i+1]]
-            n = i+2
-            while n<len(solution)-1:
-                point3, point4 = cities[solution[n]], cities[solution[n+1]]
-                ta = (point3[0] - point4[0])*(point1[1] - point3[1]) + (point3[1] - point4[1])*(point3[0] - point1[0])
-                tb = (point3[0] - point4[0])*(point2[1] - point3[1]) + (point3[1] - point4[1])*(point3[0] - point2[0])
-                tc = (point1[0] - point2[0])*(point3[1] - point1[1]) + (point1[1] - point2[1])*(point1[0] - point3[0])
-                td = (point1[0] - point2[0])*(point4[1] - point1[1]) + (point1[1] - point2[1])*(point1[0] - point4[0])
-                if(ta*tb<0 and tc*td<0):
-                    #print(solution[i])
-                    temp = solution[i+1]
-                    solution[i+1] = solution[n]
-                    solution[n] = temp
-                    #print(solution[n])
-                #if(i == 0 or n+1 == N)
-                n += 1
+        
+    def do_2opt(solution):    
+        for i in range(len(solution) - 1):
+            for j in range(i+2, len(solution)):
+                j2 = j + 1
+                if(j2 == len(solution)):
+                    j2 = 0
+                diff = distance(cities[solution[i]], cities[solution[i + 1]]) + distance(cities[solution[j]], cities[solution[j2]]) - distance(cities[solution[i]], cities[solution[j]]) - distance(cities[solution[i + 1]], cities[solution[j2]])
+                if(diff > 0):
+                    exchange_path = solution[i+1:j2]
+                    exchange_path.reverse()
+                    solution[i+1:j2] = exchange_path
         return solution
-
+    
+    
     path_len = 0
     for i in range(N):
         path = get_solution(i)
-        #path1 = remove_intersection(path)
-        #while (path != path1):
-            #path = path1
-            #path1 = remove_intersection(path1)
+        path1 = do_2opt(path)
         length = 0
         for n in range(0, N):
             length += dist[path[n]][path[n+1]]
-        #length += dist[path[0]][path[N-1]]
         print(length)
         if(path_len == 0 or length<path_len):
             path_len = length
@@ -81,4 +70,5 @@ def solve(cities):
 if __name__ == '__main__':
     assert len(sys.argv) > 1
     solution = solve(read_input(sys.argv[1]))
+    write_solution(solution)
     print_solution(solution)
